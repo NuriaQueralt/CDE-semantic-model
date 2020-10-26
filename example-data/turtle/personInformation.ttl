@@ -1,18 +1,40 @@
-@prefix : <http://purl.org/ejp-rd/cde/v010/example-rdf/> .
+@prefix : <http://purl.org/ejp-rd/cde/v020/example-rdf/> .
 @prefix obo: <http://purl.obolibrary.org/obo/> .
 @prefix sio: <http://semanticscience.org/resource/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix snomedct: <http://purl.bioontology.org/ontology/SNOMEDCT/> .
 
-:person1
-  a obo:NCBITaxon_9606;
-  sio:SIO_000008 :birthDate1;
-  obo:ERO_0001966 :gender1 .
 
-:birthDate1
-  a obo:NCIT_C68615;
-  sio:SIO_000300 "1993-01-01T00:15:00"^^xsd:dateTime .
+#An example rdf of person's birthdate
 
-:gender1
-  a obo:NCIT_C28421;
-  sio:SIO_000300 snomedct:703118005 .
+:person1 a sio:SIO_000498 ;
+  sio:SIO_000228 :role1 ;
+  sio:SIO_000217 :birthDateQuality .
+
+:birthDateQuality a obo:NCIT_C68615 ;
+  sio:SIO_000642  :birthDateOutput .
+
+:role1 a obo:OBI_0000093 ;
+  sio:SIO_000356 :birthDateProcess .
+
+:birthDateProcess sio:SIO_000229 :birthDateOutput .
+
+:birthDateOutput a sio:SIO_000340 ;
+  sio:SIO_000300 "2020-02-31T12:00:00"^^xsd:dateTime .
+
+
+# An example rdf of person's gender
+
+:person1 a sio:SIO_000498 ;
+  sio:SIO_000228 :role2 ;
+  sio:SIO_000217 :genderQuality .
+
+:role2 a obo:OBI_0000093 ;
+  sio:SIO_000356 :genderProcess .
+
+:genderQuality a obo:NCIT_C17357 ;
+  sio:SIO_000642 :genderOutput .
+
+:genderProcess sio:SIO_000229 :genderOutput .
+
+:genderOutput a sio:SIO_000340, snomedct:703118005 .

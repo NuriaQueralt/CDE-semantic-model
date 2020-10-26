@@ -1,13 +1,63 @@
-@prefix : <http://purl.org/ejp-rd/cde/v010/example-rdf/> .
-@prefix obo: <http://purl.obolibrary.org/obo/> . 
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix sio: <http://semanticscience.org/resource/> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dbsnp: <http://identifiers.org/dbsnp:> .
+@prefix hgnc: <https://identifiers.org/hgnc:> .
+@prefix bioass: <http://www.bioassayontology.org/bao#> .
+@prefix rdcmeta: <http://rdf.biosemantics.org/ontologies/rd-connect/> .
+@prefix ex: <http://example.org/> .
 
-:person1 a obo:NCBITaxon_9606;
-  sio:SIO_000008 :futureResearch1;
-  sio:SIO_000008 :secondaryUse1 .
+ex:consentingprocess
+    sio:has-output <http://example.org/my_consent_document.pdf> ;
+    sio:start-date "2020-10-18T13:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+    a obo:ICO_0000196 ;
+    rdfs:label "Consenting process" .
 
-:futureResearch1 a obo:ICO_0000149;
-  sio:SIO_000300 obo:NCIT_C49488 .
+<http://example.org/my_consent_document.pdf>
+    a obo:OBIB_0000488 ;
+    rdfs:label "Consent Document" .
 
-:secondaryUse1 a obo:ICO_0000181;
-  sio:SIO_000300 obo:NCIT_C49487 .
+ex:patientID
+    sio:denotes ex:patientrole ;
+    sio:has-value "123456"^^<http://www.w3.org/2001/XMLSchema#int> ;
+    a rdcmeta:Pseudonym, sio:identifier ;
+    rdfs:label "123456" .
+
+ex:patientX
+    obo:RO_0002162 ex:patienttaxon ;
+    sio:has-role ex:patientrole ;
+    a sio:patient .
+
+ex:patientrole
+    sio:is-realized-in ex:consentingprocess ;
+    a sio:patient-role, sio:role ;
+    rdfs:label "Patient role" .
+
+ex:patienttaxon
+    a obo:NCBITaxon_9606 ;
+    rdfs:label "some taxon" .
+
+obo:ICO_0000196
+    rdfs:label "Act of informed consenting" .
+
+obo:NCBITaxon_9606
+    rdfs:label "Homo sapiens" .
+
+obo:OBIB_0000488
+    rdfs:label "Willingness to be contacted for a research study" .
+
+rdcmeta:Pseudonym
+    rdfs:label "Pseudonym" .
+
+sio:identifier
+    rdfs:label "identifier" .
+
+sio:patient
+    rdfs:label "Patient" .
+
+sio:patient-role
+    rdfs:label "Patient role" .
+
+sio:role
+    rdfs:label "Role" .

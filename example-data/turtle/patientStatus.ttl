@@ -3,6 +3,30 @@
 @prefix sio: <http://semanticscience.org/resource/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+
+# An example rdf of person's status
+
+:person1
+  a sio:SIO_000498 ;
+  sio:SIO_000228 :role1 ;
+  sio:SIO_000217 :quality1 . 
+
+
+:role1 a obo:OBI_0000093 ;
+  sio:SIO_000356 :statusProcess1 .
+
+
+:statusProcess1 sio:SIO_000229 :statusOutput1 .
+
+:statusOutput1 a obo:PATO_0001421 .
+
+
+:quality1 a obo:NCIT_C25688 ;
+  sio:SIO_000642 :statusOutput1 .
+
+
+# An example rdf of person's dead date
+
 :person1
   a sio:SIO_000498 ;
   sio:SIO_000228 :role1 ;
